@@ -1,0 +1,437 @@
+<!--
+  This code is a part of my User Interfaces class, display a Mapbox map of Lehigh Univeristy.
+  The purpose of our web app was to have an interactive map for students on campus to click on any building
+  and post/ view photos posted in that location. 
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8' />
+    <title>Display a map</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css' rel='stylesheet' />
+
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+
+        ;
+    </style>
+</head>
+
+
+<body>
+    <style>
+        .mapboxgl-popup {
+            max-width: 400px;
+            font: 14px/20px 'Verdana', Arial, Helvetica, sans-serif;
+            color: black;
+        }
+    </style>
+
+    <div id='map'></div>
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1Ijoic2VhMjIwIiwiYSI6ImNrMmpocXRjcjB5azAzbnFwMXl1bHd5amQifQ.WqgxSu-6zlJo8wXiRAnZZw';
+        var map = new mapboxgl.Map({
+            container: 'map', // container id
+            style: 'mapbox://styles/sea220/ck2jhs3262sb81cnvjune91zy', // stylesheet location
+            center: [-75.376, 40.607], // starting position [lng, lat]
+            zoom: 16.05 // starting zoom
+        });
+
+        // Add zoom and rotation controls to the map.
+        map.addControl(new mapboxgl.NavigationControl());
+
+        map.on('load', function () {
+            // Add a layer showing the places.
+            map.addLayer({
+                "id": "places",
+                "type": "symbol",
+                "source": {
+                    "type": "geojson",
+                    "data": {
+                        "type": "FeatureCollection",
+                        "features": [{
+
+                            //Front Lawn
+                            "type": "Feature",
+                            "properties": {
+                                "description": "<strong>Front Lawn</strong><p> <a href='http://localhost:8080/settings.html'  target=\"_blank\" title=\"Opens in a new window\">Upload Photo</a> </p> <a href=\'http://localhost:8080/profile.html' target=\"_blank\" title=\"Opens in a new window\">View Photo</a> </p>",
+                                "icon": "park"
+                            },
+                            "geometry": {
+                                "type": "Point",
+                                "coordinates": [-75.378210, 40.606837]
+                            }
+                        }, {
+
+                            //Linderman
+                            "type": "Feature",
+                            "properties": {
+                                "description": "<strong>Linderman Library</strong><p> <a href=\'http://localhost:8080/settings.html' target=\"_blank\" title=\"Opens in a new window\">Upload Photo</a> </p> <a href=\'http://localhost:8080/profile.html' target=\"_blank\" title=\"Opens in a new window\">View Photo</a> </p>",
+                                "icon": "library"
+                            },
+                            "geometry": {
+                                "type": "Point",
+                                "coordinates": [-75.376944, 40.606677]
+                            }
+                        },
+
+                        {
+                            //FML
+                            "type": "Feature",
+                            "properties": {
+                                "description": "<strong> E.W.Fairchild Martindale Library</strong><p> <a href=\'http://localhost:8080/settings.html' target=\"_blank\" title=\"Opens in a new window\">Upload Photo</a> </p> <a href=\'http://localhost:8080/profile.html' target=\"_blank\" title=\"Opens in a new window\">View Photo</a> </p>",
+                                "icon": "library"
+                            },
+                            "geometry": {
+                                "type": "Point",
+                                "coordinates": [-75.377901, 40.608727]
+                            }
+                        },
+                        
+                        {
+                            //Coppee
+                            "type": "Feature",
+                            "properties": {
+                                "description": "<strong>Coppee Hall</strong><p> <a href=\'http://localhost:8080/settings.html' target=\"_blank\" title=\"Opens in a new window\">Upload Photo</a> </p> <a href=\'http://localhost:8080/profile.html' target=\"_blank\" title=\"Opens in a new window\">View Photo</a> </p>",
+                                "icon": "college"
+                            },
+                            "geometry": {
+                                "type": "Point",
+                                "coordinates": [-75.376676, 40.606018]
+                            }
+                        },
+
+                        {
+                            //Packard Lab
+                            "type": "Feature",
+                            "properties": {
+                                "description": "<strong>Packard Laboratory</strong><p> <a href=\'http://localhost:8080/settings.html' target=\"_blank\" title=\"Opens in a new window\">Upload Photo</a> </p> <a href=\'http://localhost:8080/profile.html' target=\"_blank\" title=\"Opens in a new window\">View Photo</a> </p>",
+                                "icon": "college"
+                            },
+                            "geometry": {
+                                "type": "Point",
+                                "coordinates": [-75.379039, 40.607864]
+                            }
+                        },
+
+                        {
+                            //Chandler Ullman
+                            "type": "Feature",
+                            "properties": {
+                                "description": "<strong>Chandler-Ullman Hall</strong><p> <a href=\'http://localhost:8080/settings.html' target=\"_blank\" title=\"Opens in a new window\">Upload Photo</a> </p> <a href=\'http://localhost:8080/profile.html' target=\"_blank\" title=\"Opens in a new window\">View Photo</a> </p>",
+                                "icon": "college"
+                            },
+                            "geometry": {
+                                "type": "Point",
+                                "coordinates": [-75.376522, 40.607363]
+                            }
+                        },
+
+                        {
+                            //Presidents House
+                            "type": "Feature",
+                            "properties": {
+                                "description": "<strong>President's House</strong><p> <a href=\'http://localhost:8080/settings.html' target=\"_blank\" title=\"Opens in a new window\">Upload Photo</a> </p> <a href=\'http://localhost:8080/profile.html' target=\"_blank\" title=\"Opens in a new window\">View Photo</a> </p>", "icon": "village",
+                                "icon": "town"
+                            },
+                            "geometry": {
+                                "type": "Point",
+                                "coordinates": [-75.379351, 40.606503]
+                            }
+                        },
+
+                        {
+                            //Fritz
+                            "type": "Feature",
+                            "properties": {
+                                "description": "<strong>Fritz Engineering Lab</strong><p> <a href=\'http://localhost:8080/settings.html' target=\"_blank\" title=\"Opens in a new window\">Upload Photo</a> </p> <a href=\'http://localhost:8080/profile.html' target=\"_blank\" title=\"Opens in a new window\">View Photo</a> </p>", "icon": "village",
+                                "icon": "college"
+                            },
+                            "geometry": {
+                                "type": "Point",
+                                "coordinates": [-75.376215, 40.608044]
+                            }
+                        },
+
+                        {
+                            //Wilbur
+                            "type": "Feature",
+                            "properties": {
+                                "description": "<strong>Wilbur Powerhouse</strong><p> <a href=\'http://localhost:8080/settings.html' target=\"_blank\" title=\"Opens in a new window\">Upload Photo</a> </p> <a href=\'http://localhost:8080/profile.html' target=\"_blank\" title=\"Opens in a new window\">View Photo</a> </p>", "icon": "village",
+                                "icon": "college"
+                            },
+                            "geometry": {
+                                "type": "Point",
+                                "coordinates": [-75.375659, 40.607977]
+                            }
+                        },
+
+                        {
+                            //Rathbone
+                            "type": "Feature",
+                            "properties": {
+                                "description": "<strong>Rathbone Dining Hall</strong><p> <a href=\'http://localhost:8080/settings.html' target=\"_blank\" title=\"Opens in a new window\">Upload Photo</a> </p> <a href=\'http://localhost:8080/profile.html' target=\"_blank\" title=\"Opens in a new window\">View Photo</a> </p>", "icon": "village",
+                                "icon": "restaurant"
+                            },
+                            "geometry": {
+                                "type": "Point",
+                                "coordinates": [-75.372891, 40.606696]
+                            }
+                        },
+
+                        {
+                            //Whitaker
+                            "type": "Feature",
+                            "properties": {
+                                "description": "<strong>Whitaker Laboratory</strong><p> <a href=\'http://localhost:8080/settings.html' target=\"_blank\" title=\"Opens in a new window\">Upload Photo</a> </p> <a href=\'http://localhost:8080/profile.html' target=\"_blank\" title=\"Opens in a new window\">View Photo</a> </p>", "icon": "village",
+                                "icon": "college"
+                            },
+                            "geometry": {
+                                "type": "Point",
+                                "coordinates": [-75.376274, 40.608794]
+                            }
+                        },
+
+                        {
+                            //Xmas saucon
+                            "type": "Feature",
+                            "properties": {
+                                "description": "<strong>Christmas Saucon</strong><p> <a href=\'http://localhost:8080/settings.html' target=\"_blank\" title=\"Opens in a new window\">Upload Photo</a> </p> <a href=\'http://localhost:8080/profile.html' target=\"_blank\" title=\"Opens in a new window\">View Photo</a> </p>", "icon": "village",
+                                "icon": "college"
+                            },
+                            "geometry": {
+                                "type": "Point",
+                                "coordinates": [-75.377225, 40.608108]
+                            }
+                        },
+
+                        {
+                            //Drown
+                            "type": "Feature",
+                            "properties": {
+                                "description": "<strong>Drown Hall</strong><p> <a href=\'http://localhost:8080/settings.html' target=\"_blank\" title=\"Opens in a new window\">Upload Photo</a> </p> <a href=\'http://localhost:8080/profile.html' target=\"_blank\" title=\"Opens in a new window\">View Photo</a> </p>",
+                                "icon": "college"
+                            },
+                            "geometry": {
+                                "type": "Point",
+                                "coordinates": [-75.377243, 40.605709]
+                            }
+                        },
+
+                        {
+                            //Steps
+                            "type": "Feature",
+                            "properties": {
+                                "description": "<strong>STEPS</strong><p> <a href=\'http://localhost:8080/settings.html' target=\"_blank\" title=\"Opens in a new window\">Upload Photo</a> </p> <a href=\'http://localhost:8080/profile.html' target=\"_blank\" title=\"Opens in a new window\">View Photo</a> </p>",
+                                "icon": "college"
+                            },
+                            "geometry": {
+                                "type": "Point",
+                                "coordinates": [-75.379342, 40.608587]
+                            }
+                        },
+
+                        {
+                            //Grace Hall
+                            "type": "Feature",
+                            "properties": {
+                                "description": "<strong>Grace Hall</strong><p> <a href=\'http://localhost:8080/settings.html' target=\"_blank\" title=\"Opens in a new window\">Upload Photo</a> </p> <a href=\'http://localhost:8080/profile.html' target=\"_blank\" title=\"Opens in a new window\">View Photo</a> </p>",
+                                "icon": "fitness-centre"
+                            },
+                            "geometry": {
+                                "type": "Point",
+                                "coordinates": [-75.374589, 40.606251]
+                            }
+                        },
+
+                        {
+                            //Rauch
+                            "type": "Feature",
+                            "properties": {
+                                "description": "<strong>Rauch Business Center</strong><p> <a href=\'http://localhost:8080/settings.html' target=\"_blank\" title=\"Opens in a new window\">Upload Photo</a> </p> <a href=\'http://localhost:8080/profile.html' target=\"_blank\" title=\"Opens in a new window\">View Photo</a> </p>",
+                                "icon": "college"
+                            },
+                            "geometry": {
+                                "type": "Point",
+                                "coordinates": [-75.373797, 40.608251]
+                            }
+                        },
+
+                        {
+                            //Williams Hall
+                            "type": "Feature",
+                            "properties": {
+                                "description": "<strong>Williams Hall</strong><p> <a href=\'http://localhost:8080/settings.html' target=\"_blank\" title=\"Opens in a new window\">Upload Photo</a> </p> <a href=\'http://localhost:8080/profile.html' target=\"_blank\" title=\"Opens in a new window\">View Photo</a> </p>",
+                                "icon": "cafe"
+                            },
+                            "geometry": {
+                                "type": "Point",
+                                "coordinates": [-75.375557, 40.606703]
+                            }
+                        },
+
+                        {
+                            //Church
+                            "type": "Feature",
+                            "properties": {
+                                "description": "<strong>Packard Memorial Church</strong><p> <a href=\'http://localhost:8080/settings.html' target=\"_blank\" title=\"Opens in a new window\">Upload Photo</a> </p> <a href=\'http://localhost:8080/profile.html' target=\"_blank\" title=\"Opens in a new window\">View Photo</a> </p>",
+                                "icon": "religious-christian"
+                            },
+                            "geometry": {
+                                "type": "Point",
+                                "coordinates": [-75.377653, 40.607726]
+                            }
+                        },
+
+                        {
+                            //Hawk's Nest
+                            "type": "Feature",
+                            "properties": {
+                                "description": "<strong>Hawk's Nest</strong><p> <a href=\'http://localhost:8080/settings.html' target=\"_blank\" title=\"Opens in a new window\">Upload Photo</a> </p> <a href=\'http://localhost:8080/profile.html' target=\"_blank\" title=\"Opens in a new window\">View Photo</a> </p>",
+                                "icon": "resturant"
+                            },
+                            "geometry": {
+                                "type": "Point",
+                                "coordinates": [-75.376246, 40.605564]
+                            }
+                        },
+
+                        {
+                            //Alumni Memorial
+                            "type": "Feature",
+                            "properties": {
+                                "description": "<strong>Alumni Memorial</strong><p> <a href=\'http://localhost:8080/settings.html' target=\"_blank\" title=\"Opens in a new window\">Upload Photo</a> </p> <a href=\'http://localhost:8080/profile.html' target=\"_blank\" title=\"Opens in a new window\">View Photo</a> </p>",
+                                "icon": "castle"
+                            },
+                            "geometry": {
+                                "type": "Point",
+                                "coordinates": [-75.380178, 40.606853]
+                            }
+                        },
+
+                        {
+                            //Lewis Lab
+                            "type": "Feature",
+                            "properties": {
+                                "description": "<strong>Lewis Lab</strong><p> <a href=\'http://localhost:8080/settings.html' target=\"_blank\" title=\"Opens in a new window\">Upload Photo</a> </p> <a href=\'http://localhost:8080/profile.html' target=\"_blank\" title=\"Opens in a new window\">View Photo</a> </p>",
+                                "icon": "college"
+                            },
+                            "geometry": {
+                                "type": "Point",
+                                "coordinates": [-75.375060, 40.607467]
+                            }
+                        },
+
+                        {
+                            //UC
+                            "type": "Feature",
+                            "properties": {
+                                "description": "<strong>University Center</strong><p> <a href=\'http://localhost:8080/settings.html' target=\"_blank\" title=\"Opens in a new window\">Upload Photo</a> </p> <a href=\'http://localhost:8080/profile.html' target=\"_blank\" title=\"Opens in a new window\">View Photo</a> </p>",
+                                "icon": "castle"
+                            },
+                            "geometry": {
+                                "type": "Point",
+                                "coordinates": [-75.378177, 40.606052]
+                            }
+                        },
+
+                        {
+                            //Zoellner
+                            "type": "Feature",
+                            "properties": {
+                                "description": "<strong>Zoellner Arts Center</strong><p> <a href=\'http://localhost:8080/settings.html' target=\"_blank\" title=\"Opens in a new window\">Upload Photo</a> </p> <a href=\'http://localhost:8080/profile.html' target=\"_blank\" title=\"Opens in a new window\">View Photo</a> </p>",
+                                "icon": "theatre"
+                            },
+                            "geometry": {
+                                "type": "Point",
+                                "coordinates": [-75.372665, 40.608039]
+                            }
+                        },
+
+                        {
+                            //Rathbone Hall
+                            "type": "Feature",
+                            "properties": {
+                                "description": "<strong>Rathbone Hall</strong><p> <a href=\'http://localhost:8080/settings.html' target=\"_blank\" title=\"Opens in a new window\">Upload Photo</a> </p> <a href=\'http://localhost:8080/profile.html' target=\"_blank\" title=\"Opens in a new window\">View Photo</a> </p>",
+                                "icon": "resturant"
+                            },
+                            "geometry": {
+                                "type": "Point",
+                                "coordinates": [-75.372918, 40.606694]
+                            }
+                        },
+
+
+                        {
+                            //Taylor Gym
+                            "type": "Feature",
+                            "properties": {
+                                "description": "<strong>Taylor Gymnasium</strong><p> <a href=\'http://localhost:8080/settings.html' target=\"_blank\" title=\"Opens in a new window\">Upload Photo</a> </p> <a href=\'http://localhost:8080/profile.html' target=\"_blank\" title=\"Opens in a new window\">View Photo</a> </p>",
+                                "icon": "fitness-centre"
+                            },
+                            "geometry": {
+                                "type": "Point",
+                                "coordinates": [-75.374004, 40.607288]
+                            },
+                        }]
+                    }
+                },
+                "layout": {
+                    "icon-image": "{icon}-15",
+                    "icon-allow-overlap": true,
+                    "icon-size": 2.5
+                }
+            });
+
+            // When a click event occurs on a feature in the places layer, open a popup at the
+            // location of the feature, with description HTML from its properties.
+            map.on('click', 'places', function (e) {
+                var coordinates = e.features[0].geometry.coordinates.slice();
+                var description = e.features[0].properties.description;
+
+                // Ensure that if the map is zoomed out such that multiple
+                // copies of the feature are visible, the popup appears
+                // over the copy being pointed to.
+                while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                    coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+                }
+
+                new mapboxgl.Popup()
+                    .setLngLat(coordinates)
+                    .setHTML(description)
+                    .addTo(map);
+            });
+
+            // Change the cursor to a pointer when the mouse is over the places layer.
+            map.on('mouseenter', 'places', function () {
+                map.getCanvas().style.cursor = 'pointer';
+            });
+
+            // Change it back to a pointer when it leaves.
+            map.on('mouseleave', 'places', function () {
+                map.getCanvas().style.cursor = '';
+            });
+        });
+
+    </script>
+
+</body>
+
+</html>
