@@ -14,7 +14,6 @@ unsigned char* Hash (void *data, size_t length)
   unsigned int md_len;
 
   OpenSSL_add_all_digests();
-
   md = EVP_get_digestbyname("MD5");
 
   if(!md) {
