@@ -1,5 +1,5 @@
 /*
-  CSE109: Summer 2018
+  CSE109
   Sydney Adler
   sea220
   Program 5
