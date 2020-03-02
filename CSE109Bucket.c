@@ -1,5 +1,5 @@
 /*
-  CSE 109: Summer 2018
+  CSE 109
   Sydney Adler
   sea220
   This program will take in a text as an input and a command
